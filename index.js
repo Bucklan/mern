@@ -1,25 +1,41 @@
 import express from 'express';
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import mongoose from "mongoose";
+import registerValidation from "./validations/auth.js";
+import {validationResult} from "express-validator";
 
+import UserModule from './models/User.js';
 
 const app = express();
 
 app.use(express.json());
-app.get('/', (req, res) => {
-    res.send('hello world');
-});
+mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/blog')
+    .then(() => console.log('DB ok'))
+    .catch((err) => console.log('DB error', err))
 
-app.post('/login', (req, res) => {
-    console.log(req.body);
+app.post('/register', registerValidation, async (req, res) => {
+    const errors = validationResult(req);
 
-    const token = jwt.sign(
-        {
+    if (!errors.isEmpty()) {
+        return res.status(400).json(errors.array());
+    }
+
+    const requestPassword = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(requestPassword, salt);
+
+    const doc = new UserModule({
         email: req.body.email,
-        fullname: "qwe qwe",
-    },
-        'secret123')
+        fullName: req.body.fullName,
+        avatarUrl: req.body.avatarUrl,
+        password: passwordHash,
+    });
 
-    res.json({success: true,token});
+    const user = await doc.save();
+
+
+    res.json(user);
 });
 
 app.listen(4444, (err) => {
