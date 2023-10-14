@@ -33,7 +33,6 @@ export const create = async (req, res) => {
         })
     }
 }
-
 export const show = async (req, res) => {
     try {
         const postId = req.params.id;
@@ -47,6 +46,12 @@ export const show = async (req, res) => {
             {
                 returnDocument: 'after'
             }).then(doc => {
+            if (!doc) {
+                return res.status(404).json({
+                    message: "post not found2"
+                });
+            }
+
             return res.json(doc);
         }).catch(e => {
             if (e) {
@@ -55,16 +60,78 @@ export const show = async (req, res) => {
                     message: 'failed to create an post1'
                 });
             }
-
-            if (!doc) {
-                return res.status(404).json({
-                    message: "post not found2"
-                });
-            }});
+        });
     } catch (e) {
         console.log(e);
         res.status(500).json({
             message: 'failed to create an post3'
+        })
+    }
+}
+export const update = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+        await PostModule.updateOne(
+            {
+                _id: postId,
+            },
+            {
+                title: req.body.title,
+                text: req.body.text,
+                imageUrl: req.body.imageUrl,
+                user: req.body.userId,
+                tags: req.body.tags,
+            },
+        );
+
+        res.json(
+            {
+                success: true
+            }
+        );
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'failed to update on post'
+        })
+    }
+}
+export const destroy = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+        PostModule.findOneAndDelete(
+            {
+                _id: postId,
+            }
+        )
+            .then(doc => {
+                    if (!doc) {
+                        return res.status(404).json({
+                            message: "post not found2"
+                        });
+                    }
+                    return res.json(
+                        {
+                            success: true
+                        }
+                    )
+                }
+            )
+            .catch(e => {
+                if (e) {
+                    console.log(e);
+                    return res.status(500).json({
+                        message: 'failed to delete post'
+                    })
+                }
+            });
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'failed to create an post'
         })
     }
 }
