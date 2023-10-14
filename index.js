@@ -18,7 +18,7 @@ app.get('/auth/me', checkAuth, UserController.getMe)
 //posts
 app.post('/posts', checkAuth,/* postCreateValidation,*/ PostController.create)
 app.get('/posts', checkAuth, PostController.index)
-app.get('posts/:id', checkAuth, PostController.show)
+app.get('/posts/:id', checkAuth, PostController.show)
 // run server then  port create
 app.listen(4444, (err) => {
     listRoutes();

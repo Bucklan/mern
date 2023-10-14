@@ -35,43 +35,36 @@ export const create = async (req, res) => {
 }
 
 export const show = async (req, res) => {
-    // try {
-    //     const postId = req.params.id;
-    //
-    //     PostModule.findOneAndUpdate({
-    //             _id: postId,
-    //         },
-    //         {
-    //             $inc: {viewsCount: 1}
-    //         },
-    //         {
-    //             returnDocument: 'after'
-    //         },
-    //
-    //         (e, doc) => {
-    //             if (e) {
-    //                 console.log(e);
-    //                return res.status(500).json({
-    //                     message: 'failed to create an post'
-    //                 });
-    //             }
-    //
-    //             if(!doc){
-    //                 return res.status(404).json({
-    //                     message: "post not found"
-    //                 });
-    //             }
-    //             res.json(doc);
-    //
-    //
-    //         }
-    //     )
-    //
-    //
-    // } catch (e) {
-    //     console.log(e);
-    //     res.status(500).json({
-    //         message: 'failed to create an post'
-    //     })
-    // }
+    try {
+        const postId = req.params.id;
+
+        PostModule.findOneAndUpdate({
+                _id: postId,
+            },
+            {
+                $inc: {viewsCount: 1}
+            },
+            {
+                returnDocument: 'after'
+            }).then(doc => {
+            return res.json(doc);
+        }).catch(e => {
+            if (e) {
+                console.log(e);
+                return res.status(500).json({
+                    message: 'failed to create an post1'
+                });
+            }
+
+            if (!doc) {
+                return res.status(404).json({
+                    message: "post not found2"
+                });
+            }});
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'failed to create an post3'
+        })
+    }
 }
