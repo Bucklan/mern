@@ -1,6 +1,6 @@
 import {validationResult} from "express-validator";
 import bcrypt from "bcrypt";
-import UserModule from "../models/User.js";
+import AuthorModule from "../models/Author.js";
 import jwt from "jsonwebtoken";
 
 
@@ -17,28 +17,29 @@ export const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(requestPassword, salt);
 
-        const doc = new UserModule({
+        const doc = new AuthorModule({
             email: req.body.email,
             fullName: req.body.fullName,
             avatarUrl: req.body.avatarUrl,
             password: hash,
+            year_of_birth: req.body.year_of_birth,
         });
 
-        const user = await doc.save();
+        const author = await doc.save();
 
         const token = jwt.sign(
             {
-                _id: user._id,
+                _id: author._id,
             },
             'secret123',
             {
                 expiresIn: '30d'
             }
         );
-        const {password, ...userData} = user._doc
+        const {password, ...authorData} = author._doc
 
         res.json({
-            ...userData,
+            ...authorData,
             token
         });
     } catch (e) {
@@ -51,15 +52,15 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const user = await UserModule.findOne({email: req.body.email});
+        const author = await AuthorModule.findOne({email: req.body.email});
 
-        if (!user) {
+        if (!author) {
             return res.status(404).json({
-                message: 'Users not found'
+                message: 'Authors not found'
             });
         }
 
-        const isValidPass = await bcrypt.compare(req.body.password, user._doc.password);
+        const isValidPass = await bcrypt.compare(req.body.password, author._doc.password);
 
         if (!isValidPass) {
             return res.status(404).json({
@@ -69,17 +70,17 @@ export const login = async (req, res) => {
 
         const token = jwt.sign(
             {
-                _id: user._id,
+                _id: author._id,
             },
             'secret123',
             {
                 expiresIn: '30d'
             }
         );
-        const {password, ...userData} = user._doc
+        const {password, ...authorData} = author._doc
 
         res.json({
-            ...userData,
+            ...authorData,
             token
         });
     } catch (e) {
@@ -91,19 +92,19 @@ export const login = async (req, res) => {
 }
 export const getMe = async (req, res) => {
     try {
-        const user = await UserModule.findById(req.userId);
+        const author = await AuthorModule.findById(req.authorId);
 
 
-        if (!user) {
+        if (!author) {
             return res.status(404).json({
-                message: "users not found"
+                message: "authors not found"
             });
         }
 
 
-        const {password, ...userData} = user._doc
+        const {password, ...authorData} = author._doc
 
-        res.json(userData);
+        res.json(authorData);
     } catch (e) {
         console.log(e);
         res.status(500).json({

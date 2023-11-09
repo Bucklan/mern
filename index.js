@@ -1,10 +1,11 @@
 import express from 'express';
 import multer from 'multer';
 import mongoose from "mongoose";
-import {registerValidation, loginValidation, postCreateValidation} from "./validations.js";
+import {registerValidation, loginValidation, bookCreateValidation} from "./validations.js";
 import checkAuth from './utils/checkAuth.js';
-import * as UserController from "./controllers/UserController.js";
-import * as PostController from "./controllers/PostController.js";
+import * as AuthorController from "./controllers/AuthorController.js";
+import * as BookController from "./controllers/BookController.js";
+import BookModule from "./models/Book.js";
 
 const app = express();
 
@@ -20,28 +21,28 @@ const app = express();
 
 app.use(express.json());
 // connect to db
-mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/blog')
+mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/books')
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err))
 
 // --------------- ROUTES -----------------
 // auth
-app.post('/login', loginValidation, UserController.login);
-app.post('/register', registerValidation, UserController.register);
-app.get('/auth/me', checkAuth, UserController.getMe)
-
-// app.post('/upload', checkAuth, upload.single('image'), (res, req) => {
-//     res.json({
-//         url: `/uploads${req.file.originalname}`,
-//     })
-// });
-
-//posts
-app.get('/posts', checkAuth, PostController.index)
-app.post('/posts', checkAuth,/* postCreateValidation,*/ PostController.create)
-app.get('/posts/:id', checkAuth, PostController.show)
-app.patch('/posts/:id', checkAuth, PostController.update)
-app.delete('/posts/:id', checkAuth, PostController.destroy);
+app.post('/login', /*loginValidation,*/ AuthorController.login);
+app.post('/register', registerValidation, AuthorController.register);
+app.get('/auth/me', checkAuth, AuthorController.getMe)
+//
+app.get('/books', async function (req, res) {
+    try {
+        const books = await BookModule.find().populate('author').exec();
+        res.json(books);
+    } catch (e) {
+        console.log(e);
+    }
+});
+app.get('/books/:id', checkAuth, BookController.show)
+app.post('/books', checkAuth,/* bookCreateValidation,*/ BookController.create)
+app.patch('/books/:id', checkAuth, BookController.update)
+app.delete('/books/:id', checkAuth, BookController.destroy);
 // run server then  port create
 app.listen(4444, (err) => {
     // listRoutes();
@@ -51,15 +52,5 @@ app.listen(4444, (err) => {
     console.log('server ok');
 });
 
-// check list routes
-// const listRoutes = () => {
-//     const routes = app._router.stack
-//         .filter(r => r.route)
-//         .map(r => ({
-//             method: Object.keys(r.route.methods)[0].toUpperCase(),
-//             path: r.route.path
-//         }));
-//     console.log("List Routes:");
-//     console.table(routes);
-// };
+
 
