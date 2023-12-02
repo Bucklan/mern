@@ -1,13 +1,21 @@
-<div class="dashboard-container text-center mt-8" >
+<div class="dashboard-container text-center mt-8">
   <h2 class="text-5xl font-black tracking-wide mb-8">Product Showcase</h2>
-  <div class="flex flex-wrap justify-center space-x-4">
-    <div *ngFor="let product of products" class="card w-80 bg-base-100 shadow-xl mb-8 p-4 h-100">
-      <figure class="flex justify-center mb-4">
-        <img *ngIf="product.image" [src]="getImageSource(product.image)" alt="Product Image">
-      </figure>
+  <div class="flex flex-wrap justify-center">
+    <div *ngFor="let product of products" class="card w-80 bg-blue-200 shadow-xl mb-4 p-4 h-100 mx-2 my-2">
+  
+
+     <figure class="flex justify-center mb-2">
+  <img
+    *ngIf="product.image"
+    [src]="getImageSource(product.image)"
+    alt="Product Image"
+    class="w-72 h-72" 
+  />
+</figure>
+
       <div class="card-body flex flex-col items-center">
-        <h2 class="card-title text-xl font-semibold mb-2">{{ product.name }}</h2>
-        <p class="text-gray-600 mb-2">Price: ${{ product.price }}</p>
+        <h2 class="card-title text-xl font-semibold mb-1">{{ product.name }}</h2>
+        <p class="text-gray-600 mb-1">Price: ${{ product.price }}</p>
 
         <div class="card-actions flex justify-center">
           <button mat-button color="primary" (click)="addToCart(product)">Add to Cart</button>
