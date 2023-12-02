@@ -41,4 +41,6 @@ export class ProductService {
   getProductPrice(id: string): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/getPrice/${id}`);
   }
+
+  
 }

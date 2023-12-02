@@ -1,9 +1,7 @@
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from './product.service';
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +19,24 @@ export class CartService {
 
   addToCart(productId: string): void {
     try {
-  
       this.productService.getProductQuantity(productId).subscribe(
         (quantityFromDatabase: number) => {
-  
-          const currentCart = this.cartSubject.value;
-          const existingItem = currentCart.find((item) => item.product._id === productId);
-  
-          if (existingItem) {
-            this.changeQuantity(productId, existingItem.quantity + 1);
-          } else {
-            this.cartSubject.next([...currentCart, { product: { _id: productId }, quantity: 1 }]);
-          }
-          this.updateQuantityInDatabase(productId, quantityFromDatabase - 1);
+          this.productService.getProductPrice(productId).subscribe(
+            (priceFromDatabase: number) => {
+              const currentCart = this.cartSubject.value;
+              const existingItem = currentCart.find((item) => item.product._id === productId);
+
+              if (existingItem) {
+                this.changeQuantity(productId, existingItem.quantity + 1);
+              } else {
+                this.cartSubject.next([...currentCart, { product: { _id: productId, price: priceFromDatabase }, quantity: 1 }]);
+              }
+              this.updateQuantityInDatabase(productId, quantityFromDatabase - 1);
+            },
+            (error) => {
+              console.error('Error fetching product price:', error);
+            }
+          );
         },
         (error) => {
           console.error('Error fetching product quantity:', error);
@@ -108,6 +111,10 @@ export class CartService {
 
   getTotalQuantity(): number {
     return this.cartSubject.value.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  getTotalPrice(): number {
+    return this.cartSubject.value.reduce((total, item) => total + item.quantity * item.product.price, 0);
   }
 
   updateQuantityInDatabase(productId: string, quantity: number): void {
