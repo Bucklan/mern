@@ -25,11 +25,9 @@ export class ProductsComponent implements OnInit {
   }
 
   private updateDisplayedColumns(): void {
-    if (this.authService.isAdmin()) {
+   
       this.displayedColumns = ['name', 'shotCode', 'price', 'quantity', 'createdDate', 'actions'];
-    } else {
-      this.displayedColumns = ['name', 'shotCode', 'price', 'quantity', 'createdDate'];
-    }
+    
   }
 
   private loadProducts(): void {

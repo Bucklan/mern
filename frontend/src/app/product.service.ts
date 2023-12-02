@@ -38,6 +38,9 @@ export class ProductService {
   updateQuantityInDatabase(productId: string, quantity: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/updateProductQuantity/${productId}`, { quantity });
   }
+
+ 
+  
   getProductPrice(id: string): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/getPrice/${id}`);
   }

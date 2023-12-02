@@ -32,16 +32,11 @@ export class CartComponent implements OnInit {
 
   }
 
-  removeFromCart(product: any): void {
-    this.cartService.removeFromCart(product.product._id);
-
-  }
 
   removeOneItem(cartItem: any): void {
     this.cartService.removeOneItem(cartItem.product._id);
 
   }
-
 
   getTotalQuantity(): number {
     return this.cartService.getTotalQuantity();
@@ -49,6 +44,7 @@ export class CartComponent implements OnInit {
   getTotalPrice(): number {
     return this.cartService.getTotalPrice();
   }
-  
 
+ 
+  
 }
