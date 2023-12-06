@@ -1,5 +1,11 @@
-<div *ngIf="!isCheckoutSuccessful" class="flex items-center justify-center h-screen bg-blue-50">
-  <div class="card lg:card-side glass shadow-2xl p-10" style="max-height: 80vh; overflow-y: auto;">
+<div class="title-container bg-blue-50 flex items-center justify-center pt-10">
+  <i class="fa-solid fa-cart-shopping" style="font-size: 2em;"></i>
+  <h2 class="title">Shopping Cart</h2>
+</div>
+
+<div *ngIf="!isCheckoutSuccessful" class="flex pb-10 items-center justify-center max-height: 800px; bg-blue-50">
+  
+  <div class="card lg:card-side glass shadow-2xl p-10" style="max-height: 1000px; overflow-y: auto;">
     <div class="flex flex-col sm:flex-row max-w-screen-xl p-4 space-y-4 sm:space-y-0 sm:space-x-4">
       <div class="flex flex-col max-w-md p-6 space-y-4 divide-y sm:w-96 sm:p-10">
         <h2 class="text-2xl font-semibold">Your cart</h2>
@@ -17,14 +23,25 @@
                     <p class="text-lg font-semibold">{{ cartItem.product.price.toFixed(2) }}</p>
                   </div>
                 </div>
-                <div class="flex ">
-                  <button type="button" class="flex items-center px-5  pl-0 "(click)="addToCart(cartItem)">
+                <div class="flex space-x-2">
+                  <button type="button" class="flex items-center border-black border-x-2 border-y-2 p-2
+                  " (click)="addToCart(cartItem)">
                     <i class="fas fa-plus"></i>
                   </button>
-                  <button type="button" class="flex items-center"(click)="removeOneItem(cartItem)">
+                  
+                  <div type="button" class="flex items-center border-black border-x-2 border-y-2 p-2" >
+                    {{ cartItem.quantity }}
+                  </div>
+                  
+                  <button type="button" class="flex items-center border border-black border-x-2 border-y-2 p-2" (click)="removeOneItem(cartItem)">
                     <i class="fas fa-minus"></i>
                   </button>
                 </div>
+
+                <button type="button" class="w-full py-2 font-semibold border rounded border-red-500 text-red-500 mt-2" (click)="removeall(cartItem)">Remove All</button>
+                
+                
+                
               </div>
 
             </div>
@@ -62,7 +79,7 @@
 
 </div>
 
-<div *ngIf="isCheckoutSuccessful" class="flex items-center justify-center h-screen">
+<div *ngIf="isCheckoutSuccessful" class="flex items-center justify-center h-screen bg-blue-50">
   <div class="flex items-center justify-center h-screen">
     <div>
       <div class="flex flex-col items-center space-y-2">

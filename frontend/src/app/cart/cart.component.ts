@@ -52,4 +52,7 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart();
     this.isCheckoutSuccessful = true;
   }
+  removeall(cartItem: any): void {
+    this.cartService.removeAll(cartItem.product._id);
+  }
 }

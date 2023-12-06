@@ -60,6 +60,7 @@ export class CartService {
   }
   
   
+  
   removeOneItem(productId: string): void {
     try {
       this.productService.getProductQuantity(productId).subscribe(
@@ -126,5 +127,31 @@ export class CartService {
   clearCart(): void {
     this.cartSubject.next([]); 
   }
+
+  removeAll(productId: string): void {
+    try {
+      this.productService.getProductQuantity(productId).subscribe(
+        (quantityFromDatabase: number) => {
+          const currentCart = this.cartSubject.value;
+          const existingItems = currentCart.filter((item) => item.product._id === productId);
+  
+          if (existingItems.length > 0) {
+            const updatedCart = currentCart.filter((item) => item.product._id !== productId);
+            this.cartSubject.next([...updatedCart]);
+  
+            const totalRemovedQuantity = existingItems.reduce((total, item) => total + item.quantity, 0);
+            this.updateQuantityInDatabase(productId, quantityFromDatabase + totalRemovedQuantity);
+          }
+        },
+        (error) => {
+          console.error('Error fetching product quantity:', error);
+        }
+      );
+    } catch (error) {
+      console.error('Error removing all items of a product from cart:', error);
+    }
+  }
+  
+  
 
 }
