@@ -1,26 +1,25 @@
-<div class="navbar primary-content bg-blue-200 shadow-xl ">
-  <div class="flex-1">
-    <div class="navbar-start">
-      <a class="text-xl">My 1st App</a>
+<div class="navbar primary-content bg-blue-200 "  >
+  <div class="flex-1 flex items-center justify-between">
+    <div class="navbar-start flex items-center"> 
+        <img src="/assets/logo2.png" alt="Logo" class="logo">
+       
     </div>
 
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/dashboard">Dashboard</a></li>
-        <li><a routerLink="/products">Products</a></li>
-        <li><a routerLink="/cart">My Cart</a></li>
-       
-        <li *ngIf="!isLoggedIn"><a routerLink="/signup">Signup</a></li>
-        <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-       
-        <li *ngIf="isLoggedIn"><a (click)="onLogout()">Logout</a></li>
-      </ul>
-    </div>
-
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li><a routerLink="/products">Products</a></li>
+      <li><a routerLink="/cart">My Cart</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/signup">Signup</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="onLogout()">Logout</a></li>
+    </ul>
   </div>
 
-  <div class="dropdown dropdown-end">
+
+
+  <div class="dropdown dropdown-end ">
     <label tabindex="0" class="btn btn-ghost btn-circle">
       <div class="indicator">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,9 +32,10 @@
       <div class="card-body">
         <span class="font-bold text-lg">{{ totalQuantity }} Items</span>
         <div class="card-actions">
-          <button class="btn btn-primary btn-block"><a routerLink="/cart">View cart</a></button>
+          <button class="btn bg-indigo-300 btn-block"><a routerLink="/cart">View cart</a></button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

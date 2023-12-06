@@ -10,7 +10,7 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
 
   constructor(private cartService: CartService) {}
-
+  isCheckoutSuccessful: boolean = false;
   ngOnInit(): void {
     this.getCartItems();
     
@@ -45,6 +45,11 @@ export class CartComponent implements OnInit {
     return this.cartService.getTotalPrice();
   }
 
- 
-  
+  getImageSource(imagePath: string): string {
+    return 'http://localhost:4000/' + imagePath.replace(/\\/g, '/');
+  }
+  SuccessfulCheckout() {
+    this.cartService.clearCart();
+    this.isCheckoutSuccessful = true;
+  }
 }

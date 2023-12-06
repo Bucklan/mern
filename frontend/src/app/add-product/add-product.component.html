@@ -1,4 +1,4 @@
-<div class="content-container">
+<div class="content-container bg-blue-50">
   <h2 class="title">Add New Product</h2>
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form-container" enctype="multipart/form-data">
 
@@ -89,3 +89,5 @@
   <button class="full-width" mat-raised-button color="primary" type="submit" [disabled]="!productForm.valid">Add Product</button>
 </form>
 </div>
+
+<app-footer></app-footer>

@@ -35,10 +35,6 @@ import { MenubarModule } from 'primeng/menubar';
 import { HomeComponent } from './home/home.component';
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,8 +73,6 @@ import { HomeComponent } from './home/home.component';
     MatCheckboxModule,
     MatMenuModule,
     MenubarModule
-    
-
   ],
   providers: [],
   bootstrap: [AppComponent]
