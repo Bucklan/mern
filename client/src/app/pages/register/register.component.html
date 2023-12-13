@@ -1,0 +1,75 @@
+<section class="vh-100" style="background-color: #fff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <form [formGroup]="registerForm"  class="mx-1 mx-md-4">
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+                      <input formControlName="email" type="email" id="form3Example3c" class="form-control" />
+                      <span *ngIf="registerForm.hasError('required','email') && registerForm.controls['email'].dirty" class="text-danger">*Email is required</span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example1c">Your Full Name</label><br>
+                      <input formControlName="fullName" type="text" id="form3Example1c" class="form-control" />
+                      <span *ngIf="registerForm.hasError('required','fullName') && registerForm.controls['fullName'].dirty" class="text-danger">*Full Name is required</span>
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4c">Password</label>
+                      <input formControlName="password" type="password" id="form3Example4c" class="form-control" />
+                      <span *ngIf="registerForm.hasError('required','password') && registerForm.controls['password'].dirty" class="text-danger">*Password is required</span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                      <input  formControlName="confirmPassword" type="password" id="form3Example4cd" class="form-control" />
+                      <span *ngIf="registerForm.hasError('required','confirmPassword') && registerForm.controls['confirmPassword'].dirty" class="text-danger">*Password is required</span>
+                      <span *ngIf="registerForm.hasError('confirmPasswordValidator','confirmPassword') && registerForm.controls['confirmPassword'].dirty" class="text-danger">*Password didn't matched</span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="date">Birth day</label>
+                      <input  formControlName="birthdate" type="date" id="date" class="form-control" />
+                      <span *ngIf="registerForm.hasError('required','birthdate') && registerForm.controls['birthdate'].dirty" class="text-danger">*Birthdate is required</span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button  (click)="register()" type="button" class="btn btn-primary btn-lg">Register</button>
+<!--                    <button [disabled]="registerForm.invalid" [class.disabled]="registerForm.invalid" (click)="register()" type="button" class="btn btn-primary btn-lg">Register</button>-->
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                     class="img-fluid" alt="Sample image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,41 +5,47 @@ import {registerValidation, loginValidation, postCreateValidation} from "./valid
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from "./controllers/UserController.js";
 import * as PostController from "./controllers/PostController.js";
+import cors from "cors";
 
 const app = express();
-
-const storage = multer.diskStorage({
-    destination: (_, __, cb) => {
-        cb(null, 'uploads');
-    },
-    filename: (_, file, cb) => {
-        cb(null, file.originalname);
-    },
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
 });
-
-
-const upload = multer({storage})
+// const storage = multer.diskStorage({
+//     destination: (_, __, cb) => {
+//         cb(null, 'uploads');
+//     },
+//     filename: (_, file, cb) => {
+//         cb(null, file.originalname);
+//     },
+// });
+// const upload = multer({storage})
 app.use(express.json());
 mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/blog')
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err))
-// auth
-app.post('/login', loginValidation, UserController.login);
-app.post('/register', registerValidation, UserController.register);
-app.get('/auth/me', checkAuth, UserController.getMe)
 
-app.post('/upload', checkAuth, upload.single('image'), (res, req) => {
-    res.json({
-        url: `/uploads${req.file.originalname}`,
-    })
-});
+
+// auth
+app.post('/api/auth/login', loginValidation, UserController.login);
+app.post('/api/auth/register', registerValidation, UserController.register);
+app.get('/api/auth/me', checkAuth, UserController.getMe)
+
+// app.post('api/upload', checkAuth, upload.single('image'), (res, req) => {
+//     res.json({
+//         url: `/uploads${req.file.originalname}`,
+//     })
+// });
 
 //posts
-app.get('/posts', checkAuth, PostController.index)
-app.post('/posts', checkAuth,/* postCreateValidation,*/ PostController.create)
-app.get('/posts/:id', checkAuth, PostController.show)
-app.patch('/posts/:id', checkAuth, PostController.update)
-app.delete('/posts/:id', checkAuth, PostController.destroy);
+app.get('api/posts', checkAuth, PostController.index)
+app.post('api/posts', checkAuth,/* postCreateValidation,*/ PostController.create)
+app.get('api/posts/:id', checkAuth, PostController.show)
+app.patch('api/posts/:id', checkAuth, PostController.update)
+app.delete('api/posts/:id', checkAuth, PostController.destroy);
 // run server then  port create
 app.listen(4444, (err) => {
     listRoutes();

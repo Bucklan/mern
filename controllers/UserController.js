@@ -20,6 +20,7 @@ export const register = async (req, res) => {
         const doc = new UserModule({
             email: req.body.email,
             fullName: req.body.fullName,
+            birthdate: req.body.birthdate,
             avatarUrl: req.body.avatarUrl,
             password: hash,
         });
