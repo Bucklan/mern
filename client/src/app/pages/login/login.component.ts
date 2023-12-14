@@ -29,7 +29,9 @@ loginForm !: FormGroup;
       .subscribe({
         next: (result: any) => {
           localStorage.setItem('token', result.token);
+          this.authService.isLoggedIn$.next(true);
           this.router.navigate(['/home']);
+          this.loginForm.reset();
         },
         error: (error: any) => {
           console.log(error);

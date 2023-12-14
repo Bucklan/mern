@@ -112,3 +112,31 @@ export const getMe = async (req, res) => {
         });
     }
 }
+
+// export const sendEmail = async (req, res) => {
+//     try {
+//         const email = req.body.email;
+//         const user = await User.findOne({email: {$regex: email, $options: "i"}});
+//
+//         if (!user) {
+//             return res.status(404).json({
+//                 message: "users not found"
+//             });
+//         }
+//
+//         const payload = {
+//             email: user.email,
+//             userId: user._id,
+//         };
+//
+//         const expiryTime = 60 * 60 * 1000;
+//         const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//             expiresIn: expiryTime,
+//         });
+//
+//         const newToken = new UserToken({
+//             userId: user._id,
+//             token: token,
+//         });
+//     }
+// }

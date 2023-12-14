@@ -32,7 +32,11 @@ mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/blog')
 // auth
 app.post('/api/auth/login', loginValidation, UserController.login);
 app.post('/api/auth/register', registerValidation, UserController.register);
-app.get('/api/auth/me', checkAuth, UserController.getMe)
+app.get('/api/auth/me', checkAuth, UserController.getMe);
+// app.post('/api/auth/logout', checkAuth, UserController.logout);
+//  app.post('/api/auth/send-email', UserController.refresh);
+
+
 
 // app.post('api/upload', checkAuth, upload.single('image'), (res, req) => {
 //     res.json({
