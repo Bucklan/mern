@@ -3,7 +3,7 @@ const Admin = require('../models/admin');
 
 async function createAdmin() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/Angular-app', {
+    await mongoose.connect('', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

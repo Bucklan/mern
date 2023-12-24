@@ -7,18 +7,16 @@ const path = require('path');
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/auth');
 const app = express();
-const PORT = process.env.PORT || 4000;
-
+const PORT =  8000;
 app.use(bodyParser.json());
 app.use(cors());
-
 app.use(session({
   secret: '123456', 
   resave: false,
   saveUninitialized: true,
 }));
 
-mongoose.connect('mongodb://localhost:27017/Angular-app', {
+mongoose.connect('mongodb+srv://admin:wwwwww@cluster0.4kuzydd.mongodb.net/shop', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

@@ -22,24 +22,17 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  console.log(req.body);
   const { email, password } = req.body;
-
-
-
   try {
     const admin = await Admin.findOne({ email });
     if (admin && (await bcrypt.compare(password, admin.password))) {
       res.status(200).json({ message: 'Admin login successful', role: 'admin' });
     } else {
       const user = await User.findOne({ email });
-
-  
-
       if (user && (await bcrypt.compare(password, user.password))) {
-   
         res.status(200).json({ message: 'User login successful', role: 'user' });
       } else {
-       
         res.status(401).json({ message: 'Invalid email or password' });
       }
     }
