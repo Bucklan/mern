@@ -1,0 +1,29 @@
+
+
+<div class="dashboard-container bg-blue-50">
+
+    <div class="title-container">
+      <h2 class="title">Product Dashboard</h2>
+    </div>
+
+<div class="flex flex-wrap justify-center">
+<div class="card w-72 glass mt-20 mb-20 m-2 p-2 shadow-2xl"  *ngFor="let product of products">
+  <figure><img
+    *ngIf="product.image"
+    [src]="getImageSource(product.image)"
+    alt="Product Image"
+    class="w-28 h-48"
+  /></figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ product.name }}</h2>
+    <p>Price: {{ product.price }}Tk</p>
+    <div class="card-actions justify-start">
+      <button mat-raised-button class="bg-indigo-300" (click)="addToCart(product)">Add to Cart</button>
+      
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<app-footer></app-footer>
