@@ -1,0 +1,31 @@
+<mat-list>
+  <mat-list-item *ngFor="let task of tasks">
+    dsadsa
+    <h3 mat-line>{{ task.title }}</h3>
+    <p mat-line>{{ task.description }}</p>
+    <mat-checkbox mat-list-avatar (change)="deleteTask(task._id)">
+      <span *ngIf="task.status">Completed</span>
+    </mat-checkbox>
+<!--    <mat-divider></mat-divider>-->
+  </mat-list-item>
+</mat-list>
+
+<!--<h2>Task List</h2>-->
+<!--<div *ngFor="let task of tasks">-->
+<!--  <div *ngIf="!tasks.length">-->
+<!--    <p>No tasks found. Add a task to get started.</p>-->
+<!--  </div>-->
+<!--  <a mat-raised-button color="primary" routerLink="/task/create">Create Task</a>-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>{{ task.title }}</mat-card-title>-->
+<!--    <mat-card-content>-->
+<!--      <p>{{ task.description }}</p>-->
+<!--      <mat-checkbox [checked]="task.status"></mat-checkbox>-->
+<!--&lt;!&ndash;      <p>Status: {{ task.status ? 'Completed' : 'Not Completed' }}</p>&ndash;&gt;-->
+<!--    </mat-card-content>-->
+<!--    <mat-card-actions>-->
+<!--      <button mat-button color="primary" (click)="editTask(task)">Edit</button>-->
+<!--      <button mat-button color="warn" (click)="deleteTask(task._id)">Delete</button>-->
+<!--    </mat-card-actions>-->
+<!--  </mat-card>-->
+<!--</div>-->

@@ -1,27 +1,14 @@
-
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet,CommonModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  get isLoggedIn(): boolean {
-    return this.authService.getUserRole() !== '';
-  }
-
-  constructor(private authService: AuthService) {}
-
-  logout(): void {
-    this.authService.logout().subscribe(
-      () => {
-        this.authService.setUserRole('');
-      },
-      (error) => {
-        console.error('Logout error:', error);
-      }
-    );
-  }
+  title = 'frontend';
 }
