@@ -1,26 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component'; 
-import { ProductsComponent } from './products/products.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
-import { CartComponent } from './cart/cart.component';
-import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
+import {IndexComponent} from "./task/index/index.component";
+import {CreateComponent} from "./task/create/create.component";
+import {EditComponent} from "./task/edit/edit.component";
+import {ViewComponent} from "./task/view/view.component";
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent }, 
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent }, 
-  { path: 'products', component: ProductsComponent }, 
-  { path: 'addProduct', component: AddProductComponent }, 
-  { path: 'editProduct/:id', component: EditProductComponent },
-  { path: 'cart', component: CartComponent }, 
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  
+  {path: '', redirectTo: '/task', pathMatch: 'full'},
+  {path: 'task', component: IndexComponent},
+  {path: 'task/create', component: CreateComponent},
+  {path: 'task//:taskId/edit', component: EditComponent},
+  {path: 'task//:taskId', component: ViewComponent},
+
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes),],

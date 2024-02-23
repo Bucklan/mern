@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-content>Simple card</mat-card-content>
+</mat-card>
+
+<mat-list-item *ngFor="let task of tasks">
+  title: {{ task.title }}
+  description: {{ task.description }}
+  <mat-checkbox checked="{{task.status}}" mat-list-avatar (change)="deleteTask(task._id)"/>
+</mat-list-item>

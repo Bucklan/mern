@@ -1,0 +1,13 @@
+<a href="" routerLink="/task/index">Back</a>
+<form [formGroup]="form" (ngSubmit)="submit">
+<input type="text" id="title" formControlName="title" [(ngModel)]="task.title">
+<div *ngIf="f['title'].touched && f['title'].invalid">
+<div *ngIf="f['title'].errors && f['title'].errors['required']">Title is required</div>
+</div>
+<input type="text" id="description" formControlName="description" [(ngModel)]="task.description">
+<div *ngIf="f['description'].touched && f['description'].invalid">
+<div *ngIf="f['description'].errors && f['description'].errors['required']">Title is required</div>
+</div>
+
+<button type="submit" [disabled]="!form.valid">Update</button>
+</form>

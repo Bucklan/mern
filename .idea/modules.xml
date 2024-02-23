@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/../qorap/.idea/qorap.iml" filepath="$PROJECT_DIR$/../qorap/.idea/qorap.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/mern.iml" filepath="$PROJECT_DIR$/.idea/mern.iml" />
+>>>>>>> 90c20822ca33fcf2bced6b74d632bb5ddb1a1034
     </modules>
   </component>
 </project>

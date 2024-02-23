@@ -1,0 +1,11 @@
+<h2>Add Task</h2>
+<form (submit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="title" name="title" required>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="description" name="description" required></textarea>
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="status" name="status">Completed</mat-checkbox>
+  <button mat-raised-button color="primary">Add Task</button>
+</form>
