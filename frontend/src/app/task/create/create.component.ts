@@ -1,18 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { TaskService } from '../task.service';
 import {Router, RouterLink} from '@angular/router';
-import {MatFormField} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {MatButton} from "@angular/material/button";
 import {Task} from "../task";
 
 @Component({
   selector: 'app-create',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, MatFormField, MatInput, MatCheckbox, MatButton, FormsModule],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })

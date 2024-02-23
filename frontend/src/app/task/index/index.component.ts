@@ -1,22 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
-import {MatCheckbox} from "@angular/material/checkbox";
-import {MatList, MatListItem} from "@angular/material/list";
-import {MatLine} from "@angular/material/core";
-import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-index',
-  standalone: true,
-  imports: [
-    MatList,
-    MatListItem,
-    MatCheckbox,
-    MatLine,
-    NgForOf,
-    NgIf
-  ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
